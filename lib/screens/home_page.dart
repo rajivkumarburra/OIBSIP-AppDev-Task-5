@@ -110,7 +110,9 @@ class _HomePageState extends State<HomePage> {
                   child: laps.isEmpty
                       ? Center(
                           child: Image.asset(
-                            'assets/images/empty_list.png',
+                            'assets/images/clock.png',
+                            height: 150,
+                            width: 150,
                             fit: BoxFit.cover,
                           ),
                         )
@@ -124,7 +126,7 @@ class _HomePageState extends State<HomePage> {
                                   '${index + 1}.',
                                   style: const TextStyle(
                                     fontSize: 25,
-                                    fontWeight: FontWeight.bold,
+                                    // fontWeight: FontWeight.bold,
                                     color: Colors.black,
                                   ),
                                 ),
@@ -132,10 +134,37 @@ class _HomePageState extends State<HomePage> {
                                   laps[index],
                                   style: const TextStyle(
                                     fontSize: 25,
-                                    fontWeight: FontWeight.bold,
+                                    // fontWeight: FontWeight.bold,
                                     color: Colors.black,
                                   ),
                                   textAlign: TextAlign.center,
+                                ),
+                                trailing: IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      laps.removeAt(index);
+                                    });
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: const Text(
+                                          'Lap deleted.',
+                                          style: TextStyle(
+                                            // fontWeight: FontWeight.bold,
+                                            color: Colors.black,
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                        backgroundColor: Theme.of(context)
+                                            .colorScheme
+                                            .secondary,
+                                        duration: const Duration(seconds: 1),
+                                      ),
+                                    );
+                                  },
+                                  icon: const Icon(
+                                    Icons.delete_outline,
+                                    color: Colors.black,
+                                  ),
                                 ),
                               ),
                             );
@@ -151,6 +180,21 @@ class _HomePageState extends State<HomePage> {
                     FloatingActionButton(
                       onPressed: () {
                         addLap();
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: const Text(
+                              'Lap added.',
+                              style: TextStyle(
+                                // fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                            backgroundColor:
+                                Theme.of(context).colorScheme.secondary,
+                            duration: const Duration(seconds: 1),
+                          ),
+                        );
                       },
                       backgroundColor: Theme.of(context).colorScheme.secondary,
                       child: const Icon(
